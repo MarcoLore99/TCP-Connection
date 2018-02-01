@@ -11,6 +11,8 @@ import java.io.IOException;
 import static java.lang.System.out;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,7 +47,13 @@ public class ServerConnessioneTCP {
                 in = new DataInputStream(connection.getInputStream());
                 System.out.println("Richiesta client "+ in.readUTF());
                 out= new DataOutputStream(connection.getOutputStream());
-                out.writeUTF("25/01/2018");
+
+                SimpleDateFormat sdf = new SimpleDateFormat(); // creo l'oggetto
+                String dataStr = sdf.format(new Date()); // data corrente
+
+                sdf.applyPattern("dd/MM/yyyy");  
+                
+                System.out.println(dataStr);
                 out.flush();
             }
                catch(IOException e){
